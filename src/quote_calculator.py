@@ -50,16 +50,16 @@ def calculate_quote(person, vehicle, coverage, report):
                 case _:
                     mismatched = True
                     mismatch.update({coverages: coverage[coverages]})
-
-        for coverages in report:
-            match coverages:
-                case 'violations':
-                    premium += (report['violations'] * 100)
-                case 'accidents':
-                    premium += (report['accidents'] * 500)
-                case _:
-                    mismatched = True
-                    mismatch.update({coverages: coverage[coverages]})
+        if report is not None:
+            for coverages in report:
+                match coverages:
+                    case 'violations':
+                        premium += (report['violations'] * 100)
+                    case 'accidents':
+                        premium += (report['accidents'] * 500)
+                    case _:
+                        mismatched = True
+                        mismatch.update({coverages: coverage[coverages]})
         if mismatched:
             return jsonify({'Quote Premium': premium}, {"Mismatching coverage values": mismatch}), 200
         else:
