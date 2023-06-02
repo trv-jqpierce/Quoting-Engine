@@ -61,7 +61,7 @@ def calculate_quote(person, vehicle, coverage, report):
                         mismatched = True
                         mismatch.update({coverages: report[coverages]})
         if mismatched:
-            return jsonify({'Quote Premium': premium}, {"Mismatching coverage values": mismatch}), 200
+            return jsonify({'Quote Premium': '$'+str(premium)}, {"Mismatching coverage values": mismatch}), 200
         else:
             return jsonify({'Quote Premium': '$'+str(premium)}), 200
 
